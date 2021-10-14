@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:newquikk/res/colors.dart';
 import 'package:newquikk/res/images.dart';
 import 'package:newquikk/res/numbers.dart';
+import 'package:newquikk/res/strings.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -22,41 +23,82 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 30,),
+            SizedBox(height: d_30,),
             locationContainer(),
-            CarouselSlider(
-              items: bannerList
-                  .map(
-                    (e) => ClipRRect(
-                  child:Image.asset("asset/burger.jpeg",fit: BoxFit.fill,width: MediaQuery.of(context).size.width,)
-                ),
-              ).toList(),
-              options: CarouselOptions(
-                height: d_150,
-                aspectRatio: 16 / 9,
-                viewportFraction: 1,
-                initialPage: 0,
-                enableInfiniteScroll: true,
-                disableCenter: false,
-                reverse: false,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
-                autoPlayAnimationDuration:
-                Duration(milliseconds: 800),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enlargeCenterPage: true,
-                scrollDirection: Axis.horizontal,
-              ),
-            ),
-            SizedBox(height: 20,),
+            carouselContainer(),
+            SizedBox(height: d_20,),
+            headContainer1(),
+            SizedBox(height: d_10,),
+            categoryContainer(),
             headContainer(),
             marketCardWidget(),
+
           ],
         ),
       ),
     );
   }
 
+  Widget categoryContainer(){
+    return Container(
+      height: 130,
+      child: ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+        scrollDirection: Axis.horizontal,
+        itemCount: 5,
+          itemBuilder: (context,index){
+            return Container(
+              padding: EdgeInsets.only(left:d_5),
+              child: Column(
+                children: [
+                  Card(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)
+                    ),
+                    child: Container(
+                      height: 120,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(12)
+                      ),
+
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+    );
+  }
+
+  Widget carouselContainer(){
+    return CarouselSlider(
+      items: bannerList
+          .map(
+            (e) => ClipRRect(
+            child:Image.asset("asset/burger.jpeg",fit: BoxFit.fill,width: MediaQuery.of(context).size.width,)
+        ),
+      ).toList(),
+      options: CarouselOptions(
+        height: d_150,
+        aspectRatio: 16 / 9,
+        viewportFraction: 1,
+        initialPage: 0,
+        enableInfiniteScroll: true,
+        disableCenter: false,
+        reverse: false,
+        autoPlay: true,
+        autoPlayInterval: Duration(seconds: 3),
+        autoPlayAnimationDuration:
+        Duration(milliseconds: 800),
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enlargeCenterPage: true,
+        scrollDirection: Axis.horizontal,
+      ),
+    );
+  }
 
   Widget marketCardWidget(){
     return ListView.builder(
@@ -170,7 +212,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget headContainer(){
     return Container(
       padding: EdgeInsets.only(left: d_20, right: d_20, top: d_10),
-      child: headText("All Markets Nearby",d_18,FontWeight.w700),
+      child: headText(StringConstants.MARKETS_HEAD_TEXT,d_18,FontWeight.w700),
+    );
+  }
+
+  Widget headContainer1(){
+    return Container(
+      padding: EdgeInsets.only(left: d_20, right: d_20, top: d_10),
+      child: headText("Choose By Category",d_18,FontWeight.w700),
     );
   }
 

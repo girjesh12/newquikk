@@ -22,6 +22,7 @@ class StringConstants {
   static const String CODE_SEND_SUCCESSFULLY = "Verification code send successfully";
   static const String ENTER_OTP_RECEIVE = "Enter the OTP you receive to";
   static const String OTP_VERIFICATION = "OTP Verification";
+  static const String MARKETS_HEAD_TEXT = "All Markets Nearby";
   static const String CONTINUE = "Continue";
   static const String RESEND_OTP = "RESEND OTP";
   static const String HOME = "HOME";
