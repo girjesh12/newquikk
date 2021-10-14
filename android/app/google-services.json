@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "187282849604",
+    "project_id": "newquikk-3885f",
+    "storage_bucket": "newquikk-3885f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187282849604:android:a584737a539b20eea52111",
+        "android_client_info": {
+          "package_name": "com.example.newquikk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187282849604-67olvbsltructrnqn680a8qhp3q43kbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2kfuzhjOqn0I4_oAyqG9l8eUcsery00s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187282849604-67olvbsltructrnqn680a8qhp3q43kbt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
