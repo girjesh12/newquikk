@@ -24,6 +24,9 @@ class OtpController extends ChangeNotifier {
       await _firebaseAuth.signInWithCredential(credential).then((value) async {
         if (value.user != null) {
           print('i auto verify');
+          print('i verify--->>>${value.user!.uid}');
+          _preferences = await SharedPreferences.getInstance();
+          _preferences.setString('uid', value.user!.uid);
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -80,6 +83,9 @@ class OtpController extends ChangeNotifier {
 
       if (response.user != null) {
         print('i verify');
+        print('i verify---${response.user!.uid}');
+        _preferences = await SharedPreferences.getInstance();
+        _preferences.setString('uid', response.user!.uid);
           Navigator.push(
             context,
             MaterialPageRoute(

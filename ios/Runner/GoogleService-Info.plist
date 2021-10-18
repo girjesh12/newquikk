@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>187282849604-gne4gff9b8gk081q03qme1ha6kvrdq0k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.187282849604-gne4gff9b8gk081q03qme1ha6kvrdq0k</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>187282849604-enplcu1t0r3irr10gpfacg92jvkup2tf.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDAjmmweDtwxicYczLnQr2rBmT0xuT6PQk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>187282849604</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.newquikk</string>
+	<key>PROJECT_ID</key>
+	<string>newquikk-3885f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>newquikk-3885f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:187282849604:ios:ae4ab0bc92ed1d58a52111</string>
+</dict>
+</plist>

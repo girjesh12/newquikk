@@ -1,9 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:newquikk/controller/homeController.dart';
 import 'package:newquikk/res/colors.dart';
 import 'package:newquikk/res/images.dart';
 import 'package:newquikk/res/numbers.dart';
 import 'package:newquikk/res/strings.dart';
+import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -14,26 +17,44 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  List<Widget> bannerList = [AppImages.cover,AppImages.ganesh,AppImages.burger];
+  HomeController _controller = HomeController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller.getCategory();
+    Provider.of<HomeController>(context, listen: false).init();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: d_30,),
-            locationContainer(),
-            carouselContainer(),
-            SizedBox(height: d_20,),
-            headContainer1(),
-            SizedBox(height: d_10,),
-            categoryContainer(),
-            headContainer(),
-            marketCardWidget(),
+      body: SafeArea(
+        child: SmartRefresher(
+          controller: _controller.getRefreshController,
+          onRefresh: () async {
+            _controller.init().then(
+                  (value) => _controller.getRefreshController
+                  .refreshCompleted(),
+            );
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                locationContainer(),
+                carouselContainer(),
+                SizedBox(height: d_20,),
+                headContainer1(),
+                SizedBox(height: d_10,),
+                categoryContainer(),
+                headContainer(),
+                marketCardWidget(),
 
-          ],
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -41,15 +62,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget categoryContainer(){
     return Container(
-      height: 130,
+      height: 180,
       child: ListView.builder(
           padding: EdgeInsets.symmetric(horizontal: 15),
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount: 3,
           itemBuilder: (context,index){
             return Container(
               padding: EdgeInsets.only(left:d_5),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Card(
                     elevation: 2,
@@ -57,15 +79,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(12)
                     ),
                     child: Container(
-                      height: 120,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(12)
-                      ),
+                      height: 100,
+                      width: 100,
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: _controller.categories.length>0?
+                          Image(
+                            image: NetworkImage(
+                                _controller.categories[index].image!
+                            ),
+                          )
+                         : AppImages.burger),
 
                     ),
                   ),
+                  headText(_controller.categories[index].name!,d_15,FontWeight.w500),
+                  headText("Noida",d_13,FontWeight.w400),
                 ],
               ),
             );
@@ -75,10 +104,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget carouselContainer(){
     return CarouselSlider(
-      items: bannerList
+      items: _controller.bannerList
           .map(
-            (e) => ClipRRect(
-            child:Image.asset("asset/burger.jpeg",fit: BoxFit.fill,width: MediaQuery.of(context).size.width,)
+            (i) => ClipRRect(
+            child: Image(
+              image: NetworkImage(
+              i.image!,
+            ),
+        fit: BoxFit.fill, // use this
+      ),
         ),
       ).toList(),
       options: CarouselOptions(
