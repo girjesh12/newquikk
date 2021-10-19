@@ -5,6 +5,7 @@ import 'package:newquikk/res/colors.dart';
 import 'package:newquikk/res/images.dart';
 import 'package:newquikk/res/numbers.dart';
 import 'package:newquikk/res/strings.dart';
+import 'package:newquikk/src/ui/widgetComponants/custom_home_screen_shimmer.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -19,17 +20,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   HomeController _controller = HomeController();
 
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _controller.getCategory();
+    _controller.getBanner();
     Provider.of<HomeController>(context, listen: false).init();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return _controller.loading
+        ? CustomHomeScreenShimmer()
+     : Scaffold(
       body: SafeArea(
         child: SmartRefresher(
           controller: _controller.getRefreshController,
@@ -79,8 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(12)
                     ),
                     child: Container(
-                      height: 100,
-                      width: 100,
+                      height: 120,
+                      width: 120,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: _controller.categories.length>0?
@@ -89,11 +97,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 _controller.categories[index].image!
                             ),
                           )
-                         : AppImages.burger),
+                         :
+                          AppImages.burger),
 
                     ),
                   ),
-                  headText(_controller.categories[index].name!,d_15,FontWeight.w500),
+                  headText(_controller.categories[index].name!,d_12,FontWeight.w600),
                   headText("Noida",d_13,FontWeight.w400),
                 ],
               ),
@@ -103,33 +112,35 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget carouselContainer(){
-    return CarouselSlider(
-      items: _controller.bannerList
-          .map(
-            (i) => ClipRRect(
-            child: Image(
-              image: NetworkImage(
-              i.image!,
-            ),
-        fit: BoxFit.fill, // use this
-      ),
+    return Container(
+      child: CarouselSlider(
+        items: _controller.bannerDataList
+            .map(
+              (i) => ClipRRect(
+              child: Image(
+                image: NetworkImage(
+                i.image!,
+              ),
+          fit: BoxFit.fill, // use this
+        )
+          ),
+        ).toList(),
+        options: CarouselOptions(
+          height: d_150,
+          aspectRatio: 16 / 9,
+          viewportFraction: 1,
+          initialPage: 0,
+          enableInfiniteScroll: true,
+          disableCenter: false,
+          reverse: false,
+          autoPlay: true,
+          autoPlayInterval: Duration(seconds: 3),
+          autoPlayAnimationDuration:
+          Duration(milliseconds: 800),
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enlargeCenterPage: true,
+          scrollDirection: Axis.horizontal,
         ),
-      ).toList(),
-      options: CarouselOptions(
-        height: d_150,
-        aspectRatio: 16 / 9,
-        viewportFraction: 1,
-        initialPage: 0,
-        enableInfiniteScroll: true,
-        disableCenter: false,
-        reverse: false,
-        autoPlay: true,
-        autoPlayInterval: Duration(seconds: 3),
-        autoPlayAnimationDuration:
-        Duration(milliseconds: 800),
-        autoPlayCurve: Curves.fastOutSlowIn,
-        enlargeCenterPage: true,
-        scrollDirection: Axis.horizontal,
       ),
     );
   }
