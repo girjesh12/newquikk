@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:newquikk/repository/user_repo.dart';
 import 'package:newquikk/src/ui/screens/dashboard.dart';
+import 'package:newquikk/src/ui/screens/new_enter_user_details_screen.dart';
+import 'package:newquikk/src/ui/screens/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpController extends ChangeNotifier {
@@ -11,6 +14,8 @@ class OtpController extends ChangeNotifier {
   late String _verificationId;
   TextEditingController pinEditingController = TextEditingController();
   String? phone;
+
+  UserRepo userRepo = UserRepo();
 
   void init() {
     pinEditingController.text = '';
@@ -84,8 +89,13 @@ class OtpController extends ChangeNotifier {
       if (response.user != null) {
         print('i verify');
         print('i verify---${response.user!.uid}');
-        _preferences = await SharedPreferences.getInstance();
-        _preferences.setString('uid', response.user!.uid);
+        var res = await userRepo.checkIfLoginRepo(phone: phone);
+        if(res!=null){
+          _preferences = await SharedPreferences.getInstance();
+          _preferences.setString('token', res.token!);
+          _preferences.setString('name', res.data!.name!);
+          _preferences.setString('email', res.data!.email!);
+          _preferences.setString('phone', res.data!.phone!);
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -94,6 +104,18 @@ class OtpController extends ChangeNotifier {
               ),
             ),
           );
+        } else {
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => RegisterScreen(
+                phoneNo: phone!,
+              ),
+            ),
+          );
+
+        }
         }
       } on FirebaseAuthException catch (e) {
       print(e.code);

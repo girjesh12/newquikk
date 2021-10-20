@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newquikk/controller/new_enter_details_controller.dart';
 import 'package:newquikk/res/colors.dart';
 import 'package:newquikk/res/images.dart';
 import 'package:newquikk/res/numbers.dart';
@@ -6,9 +7,11 @@ import 'package:newquikk/res/strings.dart';
 import 'package:newquikk/src/ui/screens/login.dart';
 import 'package:newquikk/src/ui/widgetComponants/app_buttons.dart';
 import 'package:newquikk/src/ui/widgetComponants/app_text_fields.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  final String? phoneNo;
+  RegisterScreen({this.phoneNo});
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -16,18 +19,14 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
 
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController mobileController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
+    var controller = Provider.of<NewEnterUserDetailsScreenController>(context);
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         child: Form(
-          key: _formKey,
+          key: controller.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -43,9 +42,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               SizedBox(height: d_50,),
               loginSignupTextRow(),
               SizedBox(height: d_20,),
-              AppTextFields.commonTextField(context, nameController,StringConstants.NAME,StringConstants.ENTER_NAME,1),
-              AppTextFields.commonTextField(context, mobileController,StringConstants.MOBILE,StringConstants.ENTER_MOBILE,0),
-              AppTextFields.commonTextField(context, emailController,StringConstants.EMAIL,StringConstants.ENTER_EMAIL,1),
+              AppTextFields.commonTextField(context,controller.getNameTED,StringConstants.NAME,StringConstants.ENTER_NAME,1,controller.validateName,controller.onSaveName),
+              // AppTextFields.commonTextField(context, mobileController,StringConstants.MOBILE,StringConstants.ENTER_MOBILE,0,),
+              AppTextFields.commonTextField(context, controller.getEmailTED,StringConstants.EMAIL,StringConstants.ENTER_EMAIL,1,controller.validateEmailFields,controller.onEmailSave),
               AppButtonHelper.mainAppButton(context,StringConstants.SIGNUP,false),
               SizedBox(height: d_20,),
               socialText(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newquikk/res/colors.dart';
 import 'package:newquikk/res/numbers.dart';
 import 'package:newquikk/res/strings.dart';
 import 'account_screen.dart';
@@ -32,7 +33,7 @@ class _DashboardState extends State<Dashboard> {
       bottomNavigationBar: Container(
         margin: EdgeInsets.only(left: d_16, right: d_16,bottom: d_16),
         decoration: BoxDecoration(
-          color: Colors.pink,
+          color: AppColors.mainColor,
           borderRadius: BorderRadius.circular(d_16),
         ),
         child: BottomNavigationBar(
@@ -42,7 +43,7 @@ class _DashboardState extends State<Dashboard> {
           elevation: 0,
           currentIndex: selectedIndex,
           selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey,
+          unselectedItemColor: Colors.grey[600],
           onTap: (v) {
             setState(() {
               selectedIndex = v;

@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  HomeController _controller = HomeController();
+  // HomeController _controller = HomeController();
 
 
 
@@ -26,8 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller.getCategory();
-    _controller.getBanner();
     Provider.of<HomeController>(context, listen: false).init();
   }
 
@@ -35,8 +33,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var _controller = Provider.of<HomeController>(context);
     return _controller.loading
-        ? CustomHomeScreenShimmer()
+        ? SafeArea(
+        child: CustomHomeScreenShimmer())
      : Scaffold(
       body: SafeArea(
         child: SmartRefresher(
@@ -51,12 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                locationContainer(),
-                carouselContainer(),
+                locationContainer(_controller),
+                carouselContainer(_controller),
                 SizedBox(height: d_20,),
                 headContainer1(),
                 SizedBox(height: d_10,),
-                categoryContainer(),
+                categoryContainer(_controller),
                 headContainer(),
                 marketCardWidget(),
 
@@ -68,13 +68,15 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget categoryContainer(){
+  Widget categoryContainer(HomeController _controller){
     return Container(
       height: 180,
       child: ListView.builder(
           padding: EdgeInsets.symmetric(horizontal: 15),
         scrollDirection: Axis.horizontal,
-        itemCount: 3,
+        itemCount: _controller.getCategories.length > 7
+            ? 7
+            : _controller.getCategories.length,
           itemBuilder: (context,index){
             return Container(
               padding: EdgeInsets.only(left:d_5),
@@ -111,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget carouselContainer(){
+  Widget carouselContainer(HomeController _controller){
     return Container(
       child: CarouselSlider(
         items: _controller.bannerDataList
@@ -186,47 +188,60 @@ class _HomeScreenState extends State<HomeScreen> {
         });
   }
 
-  Widget locationContainer(){
+  Widget locationContainer(HomeController controller){
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: d_10,vertical: d_10),
+      padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
       child: Row(
-       children: [
-        locationCard(),
-         searchCard()
-       ],
+        children: [
+          locationCard(controller),
+          searchCard(controller)
+        ],
       ),
     );
   }
 
-  Widget locationCard(){
-    return  Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)
-      ),
-      child: Container(
-        height: d_45,
-        width: d_45,
-        child: Icon(Icons.location_on,color: AppColors.mainColor,),
+  Widget locationCard(HomeController controller){
+    return  GestureDetector(
+      onTap: () => controller.openBottomSheet(context),
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12)
+        ),
+        child: Container(
+          height: 45,
+          width: 45,
+          child: Icon(Icons.location_on,color: AppColors.mainColor,),
+        ),
       ),
     );
   }
 
-  Widget searchCard(){
+  Widget searchCard(HomeController controller){
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)
       ),
       child: Container(
-        padding: EdgeInsets.only(left: d_10, right: d_6),
-        height: d_45,
-        width: MediaQuery.of(context).size.width-d_100,
+        padding: EdgeInsets.only(left: 10, right: 6),
+        height: 45,
+        width: MediaQuery.of(context).size.width*.75,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("9-D Krishna Nagar, Delhi"),
-            Icon(Icons.search_rounded,color: AppColors.mainColor,),
+            Flexible(
+              child: Text(
+                controller.address ?? '',
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 12,fontWeight: FontWeight.w400),
+              ),
+            ),
+            // IconButton(
+            //   // onPressed: () => controller.goToSearchScreen(context),
+            //   icon:
+              Icon(Icons.search_rounded,color: AppColors.mainColor,)
+
           ],
         ),
       ),

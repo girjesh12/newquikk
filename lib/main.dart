@@ -4,7 +4,10 @@ import 'package:newquikk/src/ui/screens/dashboard.dart';
 import 'package:newquikk/src/ui/screens/splash.dart';
 import 'package:provider/provider.dart';
 import 'controller/homeController.dart';
+import 'controller/my_accout_screen_controller.dart';
+import 'controller/new_enter_details_controller.dart';
 import 'controller/opt_controller.dart';
+import 'controller/splash_controller.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,8 +19,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
+            ChangeNotifierProvider<SplashScreenController>(create: (_) => SplashScreenController()),
             ChangeNotifierProvider<OtpController>(create: (_) => OtpController()),
-            ChangeNotifierProvider<HomeController>(create: (_) => HomeController(),)
+            ChangeNotifierProvider<NewEnterUserDetailsScreenController>(create: (_) => NewEnterUserDetailsScreenController()),
+            ChangeNotifierProvider<HomeController>(create: (_) => HomeController(),),
+            ChangeNotifierProvider<MyAccountScreenController>(create: (_) => MyAccountScreenController(),),
 
         ],
      child:  MaterialApp(

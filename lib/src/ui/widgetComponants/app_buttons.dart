@@ -21,7 +21,7 @@ class AppButtonHelper {
               child: Text(
                 text,
                 style: TextStyle(
-                    fontSize: d_15,
+                    fontSize: d_13,
                     fontWeight: FontWeight.w700,
                     color: active ? Colors.white : Colors.white),
                 textAlign: TextAlign.center,
@@ -43,22 +43,21 @@ class AppButtonHelper {
           padding: EdgeInsets.only(left: d_20,right: d_20 ),
           height: d_50,
           width: MediaQuery.of(context).size.width,
-          child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Icons.facebook_rounded,color: Colors.white,size: 30,),
-                  Text(
-                    text,
-                    style: TextStyle(
-                        fontSize: d_15,
-                        fontWeight: FontWeight.w700,
-                        color: active ? Colors.white : Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                  Container()
-                ],
-              )),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(Icons.facebook_rounded,color: Colors.white,size: 30,),
+              Text(
+                text,
+                style: TextStyle(
+                    fontSize: d_13,
+                    fontWeight: FontWeight.w700,
+                    color: active ? Colors.white : Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              Container()
+            ],
+          ),
         ),
       ),
     );
@@ -80,22 +79,21 @@ class AppButtonHelper {
             padding: EdgeInsets.only(left: d_20,right: d_20 ),
             height: d_50,
             width: MediaQuery.of(context).size.width,
-            child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(height: 30,child: AppImages.googleIcon,),
-                    Text(
-                      text,
-                      style: TextStyle(
-                          fontSize: d_15,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xff707070)),
-                      textAlign: TextAlign.center,
-                    ),
-                    Container()
-                  ],
-                )),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(height: 30,child: AppImages.googleIcon,),
+                Text(
+                  text,
+                  style: TextStyle(
+                      fontSize: d_13,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xff707070)),
+                  textAlign: TextAlign.center,
+                ),
+                Container()
+              ],
+            ),
           ),
         ),
       ),

@@ -69,7 +69,48 @@ class AppTextFields {
   }
 
 
-  static Widget commonTextField(BuildContext context, controller, String labelText, String hintText,int type,){
+  static Widget commonTextField(BuildContext context, controller, String labelText, String hintText,int type,validator,onSaved){
+    return  Padding(
+      padding: const EdgeInsets.only(top: d_20, left: d_20, right: d_20),
+      child: Container(
+          height: d_50,
+          child: TextFormField(
+            validator: validator,
+            controller: controller,
+            onSaved: onSaved,
+            keyboardType: type==0 ? TextInputType.phone : TextInputType.text,
+            inputFormatters: [
+              type==1 ? FilteringTextInputFormatter.deny(new RegExp(r'[!$#<>?":` ~;[\]\\|=)(*&^%]'))
+                  : FilteringTextInputFormatter.deny(new RegExp(r' ')),
+            ],
+            decoration: new InputDecoration(
+                labelStyle: TextStyle(fontSize: 14.0,color: AppColors.mainColor),
+                labelText: labelText,
+                hintText: hintText,
+                hintStyle: TextStyle(fontSize: 14,color: AppColors.textFieldHintTextColor),
+                filled: true,
+                fillColor: Colors.white,
+                enabledBorder: new OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(d_10),
+                  borderSide: new BorderSide(
+                      color: AppColors.mainColor
+                  ),
+                ),
+                focusedBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(d_10),
+                    borderSide: new BorderSide(
+                        color: AppColors.mainColor
+                    )),
+                border: OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(d_10),
+                    borderSide: BorderSide(
+                        color: Colors.black, width: 1.0))),
+            style: new TextStyle(color: Colors.black),
+          )),
+    );
+  }
+
+  static Widget commonMobileField(BuildContext context, controller, String labelText, String hintText,int type){
     return  Padding(
       padding: const EdgeInsets.only(top: d_20, left: d_20, right: d_20),
       child: Container(

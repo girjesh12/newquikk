@@ -4,7 +4,6 @@ import 'package:newquikk/controller/opt_controller.dart';
 import 'package:newquikk/res/colors.dart';
 import 'package:newquikk/res/images.dart';
 import 'package:newquikk/res/strings.dart';
-import 'package:newquikk/src/ui/screens/dashboard.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +44,7 @@ class _OTPScreenState extends State<OTPScreen> {
             otpCard(controller),
             SizedBox(height: 30,),
             continueButton(controller),
+            SizedBox(height: 30,),
           ],
         ),
       ),
@@ -58,20 +58,15 @@ class _OTPScreenState extends State<OTPScreen> {
         controller.onFormSubmitted(context);
       },
       child: Container(
-        width: 95,
+        padding: const EdgeInsets.all(6.0),
         decoration: BoxDecoration(
             color: AppColors.mainColor,
             borderRadius: BorderRadius.circular(12.0)
         ),
         child:Padding(
-          padding: const EdgeInsets.only(left: 8.0,right: 5.0,top: 3.0, bottom: 3.0),
-          child: Row(
-            children: [
-              Text(StringConstants.CONTINUE,style: TextStyle(color: Colors.white,
-                  fontSize: 12,fontWeight: FontWeight.w700),),
-              Icon(Icons.play_arrow,color: Colors.white,size: 22,)
-            ],
-          ),
+          padding: const EdgeInsets.only(left: 5.0,right: 5.0,top: 3.0, bottom: 3.0),
+          child: Text(StringConstants.CONTINUE,style: TextStyle(color: Colors.white,
+              fontSize: 12,fontWeight: FontWeight.w700),),
         ),
       ),
     );
@@ -80,7 +75,7 @@ class _OTPScreenState extends State<OTPScreen> {
   Widget otpVerificationText(){
     return Padding(
       padding: EdgeInsets.only(left: 20,right: 20,top: 30),
-      child: Text(StringConstants.OTP_VERIFICATION,style: TextStyle(color: Color(0xff122A2B),
+      child: Text(StringConstants.OTP_VERIFICATION,style: TextStyle(color: AppColors.mainColor,
           fontSize: 18,fontWeight: FontWeight.w600),),
     );
   }
@@ -96,7 +91,7 @@ class _OTPScreenState extends State<OTPScreen> {
   Widget getMobTextText(){
     return  Padding(
       padding: EdgeInsets.only(left: 20,right: 20),
-      child: Text("+91 ${widget.mobile}",style: TextStyle(color: Color(0xff122A2B),
+      child: Text("+91-${widget.mobile}",style: TextStyle(color: AppColors.mainColor,
           fontSize: 12,fontWeight: FontWeight.w700),),
     );
   }
@@ -112,9 +107,9 @@ class _OTPScreenState extends State<OTPScreen> {
         padding: EdgeInsets.only(left: 22,right: 20,bottom: 30),
         child: Row(
           children: [
-            Text(StringConstants.RESEND_OTP,style: TextStyle(color: Color(0xff7EC6E6),
+            Text(StringConstants.RESEND_OTP,style: TextStyle(color: AppColors.mainColor,
                 fontSize: 12,fontWeight: FontWeight.w700),),
-            Icon(Icons.play_arrow,color: Color(0xff7EC6E6),)
+            Icon(Icons.play_arrow,color: AppColors.mainColor,)
           ],
         ),
       ),
@@ -140,6 +135,7 @@ class _OTPScreenState extends State<OTPScreen> {
               otpVerificationText(),
               SizedBox(height: 30,),
               otpReceiveTextText(),
+              SizedBox(height: 6,),
               getMobTextText(),
               SizedBox(height: 20,),
               Container(
@@ -158,7 +154,8 @@ class _OTPScreenState extends State<OTPScreen> {
                 ),
               ),
               SizedBox(height: 30,),
-              resendOTPButton(controller)
+              resendOTPButton(controller),
+
             ],
           ),
         ),

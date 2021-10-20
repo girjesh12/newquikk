@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color mainColor = Color(0xffF03F61);
+  static const Color mainColor = Color(0xff660d33);
   static const darkGray = Color.fromRGBO(79, 79, 79, 1);
   static const Color azureColor = Color.fromRGBO(0, 178, 227, 1.0);
   static const Color fadeWhite = Color.fromRGBO(243, 246, 249, 1.0);
-  static const Color inactiveBtnColor = Color(0xffF56580);
+  static const Color inactiveBtnColor = Color(0xff660d33);
   static const Color fbBtnColor = Color(0xff3B5998);
   static const Color otpBackgroundColor = Color(0xffF2F8F4);
   static const Color dashBoardColor = Color.fromRGBO(223, 223, 223, 1.0);
@@ -27,16 +27,16 @@ class AppColors {
   static const  MaterialColor primarySwatch = const MaterialColor(
     0xffF03F61,
     const <int, Color>{
-      50: const Color(0xffF03F61),
-      100: const Color(0xffF03F61),
-      200: const Color(0xffF03F61),
-      300: const Color(0xffF03F61),
-      400: const Color(0xffF03F61),
-      500: const Color(0xffF03F61),
-      600: const Color(0xffF03F61),
-      700: const Color(0xffF03F61),
-      800: const Color(0xffF03F61),
-      900: const Color(0xffF03F61),
+      50: const Color(0xff660d33),
+      100: const Color(0xff660d33),
+      200: const Color(0xff660d33),
+      300: const Color(0xff660d33),
+      400: const Color(0xff660d33),
+      500: const Color(0xff660d33),
+      600: const Color(0xff660d33),
+      700: const Color(0xff660d33),
+      800: const Color(0xff660d33),
+      900: const Color(0xff660d33),
     },
   );
 }

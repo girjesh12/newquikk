@@ -44,8 +44,7 @@ class _LoginState extends State<Login> {
               SizedBox(height: d_50,),
               loginSignupTextRow(),
               SizedBox(height: d_20,),
-              AppTextFields.commonTextField(context, controller, StringConstants.MOBILE,StringConstants.ENTER_MOBILE,
-              0),
+              AppTextFields.commonMobileField(context, controller, StringConstants.MOBILE,StringConstants.ENTER_MOBILE,0),
               GestureDetector(
                 onTap: (){
                   if(controller.text.isNotEmpty){
@@ -74,9 +73,9 @@ class _LoginState extends State<Login> {
         width: d_50,
         child: Column(
           children: [
-            Text(StringConstants.LOGIN,style: TextStyle(color: AppColors.mainColor,fontSize: d_18,fontWeight: FontWeight.w600),),
+            Text(StringConstants.LOGIN,style: TextStyle(color: AppColors.mainColor,fontSize: d_16,fontWeight: FontWeight.w600),),
             SizedBox(height: d_3,),
-            Container(width: d_40,height: d_2,color: AppColors.inactiveBtnColor,)
+            Container(width: d_30,height: d_2,color: AppColors.inactiveBtnColor,)
           ],
         ));
   }
@@ -97,7 +96,7 @@ class _LoginState extends State<Login> {
                 MaterialPageRoute(builder: (context) => RegisterScreen()),
               );
             },
-              child: Text(StringConstants.SIGNUP,style: TextStyle(color: Colors.black,fontSize: d_18,fontWeight: FontWeight.w600),)),
+              child: Text(StringConstants.SIGNUP,style: TextStyle(color: Colors.black,fontSize: d_16,fontWeight: FontWeight.w600),)),
         ],
       ),
     );
@@ -106,7 +105,7 @@ class _LoginState extends State<Login> {
   Widget welcomeBackText(){
     return  Padding(
       padding: const EdgeInsets.only(left: d_20),
-      child: Text(StringConstants.WELCOME_TEXT,style: TextStyle(color: Colors.black,fontSize: d_20,fontWeight: FontWeight.w700),),
+      child: Text(StringConstants.WELCOME_TEXT,style: TextStyle(color: AppColors.mainColor,fontSize: d_18,fontWeight: FontWeight.w700),),
     );
   }
 
@@ -114,17 +113,14 @@ class _LoginState extends State<Login> {
     return Padding(
       padding: const EdgeInsets.only(left: d_20),
       child: Text(StringConstants.CONTINUE_USING_APP,style: TextStyle(color: Colors.grey[700],
-          fontSize: d_15,fontWeight: FontWeight.w300),),
+          fontSize: d_13,fontWeight: FontWeight.w300),),
     );
   }
 
   Widget socialText(){
-    return Padding(
-      padding: const EdgeInsets.only(left: d_20),
-      child: Center(
-        child: Text(StringConstants.USING_SOCIAL_MEDIA,textAlign: TextAlign.center,style: TextStyle(color: Colors.grey[700],
-            fontSize: d_15,fontWeight: FontWeight.w300),),
-      ),
+    return Center(
+      child: Text(StringConstants.USING_SOCIAL_MEDIA,textAlign: TextAlign.center,style: TextStyle(color: Colors.grey[700],
+          fontSize: d_13,fontWeight: FontWeight.w300),),
     );
   }
 }
