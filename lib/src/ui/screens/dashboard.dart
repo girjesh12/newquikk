@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
+import 'package:newquikk/controller/bottomNav_controller.dart';
+import 'package:newquikk/helper/constants.dart';
 import 'package:newquikk/res/colors.dart';
 import 'package:newquikk/res/numbers.dart';
 import 'package:newquikk/res/strings.dart';
+import 'package:provider/provider.dart';
 import 'account_screen.dart';
 import 'cart_screen.dart';
 import 'home.dart';
@@ -27,9 +31,17 @@ class _DashboardState extends State<Dashboard> {
 
   int selectedIndex = 0;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<BottomNavController>(context, listen: false).checkForInternet();
+  }
+
 
   @override
   Widget build(BuildContext context) {
+    var bController = Provider.of<BottomNavController>(context);
     return WillPopScope(
       onWillPop: () async {
         showDialog(
@@ -39,23 +51,14 @@ class _DashboardState extends State<Dashboard> {
             actions: [
               OutlinedButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'Cancel',
-                  style: Theme.of(context).textTheme.button!.copyWith(
-                    color: Colors.black,
-                  ),
-                ),
+                child: Text('Cancel', style: Theme.of(context).textTheme.button!.copyWith(color: Colors.black,),),
               ),
               OutlinedButton(
                 onPressed: () => SystemNavigator.pop(),
-                child: Text(
-                  'Exit',
-                  style: Theme.of(context).textTheme.button,
-                ),
+                child: Text('Exit', style: Theme.of(context).textTheme.button,),
               ),
             ],
-          ),
-        );
+          ));
         return false;
       },
       child: Scaffold(
@@ -116,8 +119,15 @@ class _DashboardState extends State<Dashboard> {
             ],
           ),
         ),
-        body: _screens[selectedIndex]
-
+        body: bController.isConnected?
+        _screens[selectedIndex]
+            : Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset(Constant.KLottieAsset + 'no_internet.json'),
+          Text('No internet connection',
+            style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.black45, fontWeight: FontWeight.bold,),)
+        ],),
       ),
     );
   }

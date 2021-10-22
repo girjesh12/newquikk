@@ -49,6 +49,7 @@ dependencies:
   webview_flutter: ^2.0.12
   dotted_border: ^2.0.0
   expandable: ^5.0.1
+  connectivity: ^3.0.6
 
 
 

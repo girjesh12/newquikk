@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:newquikk/controller/bottomNav_controller.dart';
 import 'package:newquikk/controller/manage_address_controller.dart';
 import 'package:newquikk/src/ui/screens/splash.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider<HomeController>(create: (_) => HomeController(),),
             ChangeNotifierProvider<MyAccountScreenController>(create: (_) => MyAccountScreenController(),),
             ChangeNotifierProvider<ManageAddressController>(create: (_) => ManageAddressController(),),
+            ChangeNotifierProvider<BottomNavController>(create: (_) => BottomNavController(),),
 
         ],
      child:  MaterialApp(

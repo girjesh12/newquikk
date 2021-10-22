@@ -18,22 +18,18 @@ import 'package:location/location.dart' as locationFetch;
 import 'package:google_maps_webservice/places.dart';
 
 
-
-
 class HomeController extends ChangeNotifier {
+
   late List<CategoryModel> categories;
   late List<AddressModel> addresses;
   late List<MarketModel> _shops;
   late List<CouponModel> _coupons;
-
   late SharedPreferences _preferences;
   String? lat;
   String? lng;
   locationFetch.Location location = locationFetch.Location();
   String? address;
-
   UserRepo userRepo = UserRepo();
-
   bool loading = false;
   HomeRepo _bannerRepo = HomeRepo();
   List<BannerModel> bannerDataList = [];
@@ -117,7 +113,6 @@ class HomeController extends ChangeNotifier {
     }
   }
 
-
   Future<void> getCurrentLocation() async {
     loading = true;
     notifyListeners();
@@ -166,7 +161,6 @@ class HomeController extends ChangeNotifier {
       ],
       types: [],
       hint: "Search City",
-
       // startText: 's'
     );
     // print(p?.placeId);
@@ -405,17 +399,9 @@ class HomeController extends ChangeNotifier {
     );
   }
 
-  // void goToSearchScreen(BuildContext context) {
-  //   pushNewScreen(context,
-  //       screen: SearchMarketScreen(
-  //         lat: lat!,
-  //         lng: lng!,
-  //       ),
-  //       withNavBar: false);
-  // }
-
-
-
+  List<MarketModel> get getShops {
+    return _shops;
+  }
 
   void getBanner() async {
     bannerDataList = await _bannerRepo.getBannerRepo();
@@ -434,9 +420,5 @@ class HomeController extends ChangeNotifier {
   RefreshController get getRefreshController {
     return _refreshController;
   }
-
-
-
-
 
 }

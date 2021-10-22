@@ -8,16 +8,13 @@ import 'package:newquikk/res/strings.dart';
 import 'package:newquikk/src/ui/widgetComponants/custom_home_screen_shimmer.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'market_card.dart';
 
 class HomeScreen extends StatefulWidget {
-
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-
 class _HomeScreenState extends State<HomeScreen> {
-
 
   @override
   void initState() {
@@ -26,25 +23,17 @@ class _HomeScreenState extends State<HomeScreen> {
     Provider.of<HomeController>(context, listen: false).init();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     var _controller = Provider.of<HomeController>(context);
-    return
-      _controller.loading
-        ? SafeArea(
+    return _controller.loading ? SafeArea(
         child: CustomHomeScreenShimmer())
-     :
-      Scaffold(
+     : Scaffold(
       body: SafeArea(
         child: SmartRefresher(
           controller: _controller.getRefreshController,
           onRefresh: () async {
-            _controller.init().then(
-                  (value) => _controller.getRefreshController
-                  .refreshCompleted(),
-            );
+            _controller.init().then((value) => _controller.getRefreshController.refreshCompleted());
           },
           child: SingleChildScrollView(
             child: Column(
@@ -57,8 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: d_10,),
                 categoryContainer(_controller),
                 headContainer(),
-                marketCardWidget(),
-
+                marketCardWidget(_controller),
               ],
             ),
           ),
@@ -146,43 +134,28 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget marketCardWidget(){
-    return ListView.builder(
+  Widget marketCardWidget(HomeController _controller){
+    return _controller.getShops.isEmpty
+        ? Center(
+      child: Container(
+        height:
+        MediaQuery.of(context).size.height * .5,
+        child: Center(
+          child: Text(
+              'No Shops Available in this location'),
+        ),
+      ),
+    )
+     : ListView.builder(
         padding: EdgeInsets.only(top: d_5),
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: 3,
+      itemCount: _controller.getShops.length,
         itemBuilder: (context,index){
-          return Container(
-            child: Column(
-              children: [
-                restaurantCard(),
-                Container(
-                  padding: EdgeInsets.only(left: d_20, right: d_20, top: d_10, bottom: d_10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      headText("Restaurant WEIL, Delhi",d_16,FontWeight.w700),
-                      Container(
-                        padding: EdgeInsets.zero,
-                        child: Row(
-                          children: [
-                            Icon(Icons.location_on,color: AppColors.mainColor,size: d_18,),
-                            headText("944 W sails Noida, India",d_13,FontWeight.w400),
-                          ],
-                        ),
-                      ),
-                      headText("30 Rs. for two person",d_12,FontWeight.w400),
-
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left:d_20, right: d_20),
-                  child: Divider(color: Colors.grey[400],),
-                )
-              ],
-            ),
+          return Padding(
+            padding: const EdgeInsets.only(
+                bottom: 8),
+            child: MarketCard( shop: _controller.getShops[index],),
           );
         });
   }
@@ -250,21 +223,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget headText(String text,fontSize,fontWeight){
     return Container(
       child: Text(text,style: TextStyle(fontSize: fontSize,fontWeight: fontWeight),),
-    );
-  }
-
-  Widget restaurantCard(){
-    return Container(
-      padding: EdgeInsets.only(left: d_20, right: d_20, top: d_10, bottom: d_10),
-      height: 200,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(d_10)
-      ),
-      width: MediaQuery.of(context).size.width,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(d_10),
-        child: AppImages.cover,
-      ),
     );
   }
 
