@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:newquikk/src/ui/screens/dashboard.dart';
+import 'package:newquikk/controller/manage_address_controller.dart';
 import 'package:newquikk/src/ui/screens/splash.dart';
 import 'package:provider/provider.dart';
 import 'controller/homeController.dart';
@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider<NewEnterUserDetailsScreenController>(create: (_) => NewEnterUserDetailsScreenController()),
             ChangeNotifierProvider<HomeController>(create: (_) => HomeController(),),
             ChangeNotifierProvider<MyAccountScreenController>(create: (_) => MyAccountScreenController(),),
+            ChangeNotifierProvider<ManageAddressController>(create: (_) => ManageAddressController(),),
 
         ],
      child:  MaterialApp(

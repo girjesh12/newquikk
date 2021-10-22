@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Constant {
-  static const KAsset = 'assets/images/';
-  static const KLottieAsset = 'assets/lottie/';
+  static const KAsset = 'asset/';
+  static const KLottieAsset = 'asset/lottie/';
   static const KHeight1 = 32.0;
   static const KHeight2 = 16.0;
 

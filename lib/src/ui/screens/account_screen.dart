@@ -5,6 +5,10 @@ import 'package:newquikk/res/colors.dart';
 import 'package:newquikk/res/custom_loading.dart';
 import 'package:provider/provider.dart';
 
+import 'address/manage_address.dart';
+import 'help/reffer.dart';
+import 'help/web_view.dart';
+
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -38,45 +42,53 @@ class _AccountScreenState extends State<AccountScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 16,
-                ),
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.grey.withOpacity(.4),
-                  child: Icon(
-                    Icons.person_outline,
-                    color: Colors.white,
-                    size: 64,
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: AppColors.mainColor,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Colors.grey.withOpacity(.4),
+                        child: Icon(
+                          Icons.person_outline,
+                          color: Colors.white,
+                          size: 64,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        '${controller.getName}',
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 0,
+                      ),
+                      Text(
+                        '${controller.getEmail}',
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                      Text(
+                        '${controller.getPhone}',
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  '${controller.getName}',
-                  style: Theme.of(context).textTheme.headline5!.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 0,
-                ),
-                Text(
-                  '${controller.getEmail}',
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                    color: Colors.black38,
-                  ),
-                ),
-                Text(
-                  '${controller.getPhone}',
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                    color: Colors.black38,
-                  ),
-                ),
-                SizedBox(
-                  height: 16,
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 24),
@@ -114,12 +126,12 @@ class _AccountScreenState extends State<AccountScreen> {
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
-                            Image.asset('asset/quikk_coin.png'),
+                            Image.asset(Constant.KAsset+'quikk_coin.png'),
                             Text(controller.getAccountReferModel!.coinBalance
                                   .toString(),
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline5!
+                                  .headline6!
                                   .copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -149,17 +161,12 @@ class _AccountScreenState extends State<AccountScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  // onTap: () =>
-                  //     Future.delayed(Duration(milliseconds: 400)).then(
-                  //           (value) => pushNewScreen(
-                  //         context,
-                  //         screen: ManageAddressScreen(),
-                  //         withNavBar: false,
-                  //         // OPTIONAL VALUE. True by default.
-                  //         pageTransitionAnimation:
-                  //         PageTransitionAnimation.cupertino,
-                  //       ),
-                  //     ),
+                  onTap: () =>
+                      Future.delayed(Duration(milliseconds: 400)).then(
+                            (value) => Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => ManageAddressScreen()
+                                ))
+                      ),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -174,17 +181,12 @@ class _AccountScreenState extends State<AccountScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  // onTap: () =>
-                  //     Future.delayed(Duration(milliseconds: 400)).then(
-                  //           (value) => pushNewScreen(
-                  //         context,
-                  //         screen: ReferScreen(),
-                  //         withNavBar: false,
-                  //         // OPTIONAL VALUE. True by default.
-                  //         pageTransitionAnimation:
-                  //         PageTransitionAnimation.cupertino,
-                  //       ),
-                  //     ),
+                  onTap: () =>
+                      Future.delayed(Duration(milliseconds: 400)).then(
+                            (value) => Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => ReferScreen()
+                                ))
+                      ),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -199,16 +201,13 @@ class _AccountScreenState extends State<AccountScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  // onTap: () =>
-                  //     Future.delayed(Duration(milliseconds: 400)).then(
-                  //           (value) => pushNewScreen(
-                  //         context,
-                  //         screen: WebViewMobileScreen(
-                  //           url: 'https://quikkdelivery.com/mobileterms',
-                  //         ),
-                  //         withNavBar: false,
-                  //       ),
-                  //     ),
+                  onTap: () =>
+                      Future.delayed(Duration(milliseconds: 400)).then(
+                            (value) =>  Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => WebViewMobileScreen(
+                                  url: 'https://quikkdelivery.com/mobileterms',
+                                )))
+                      ),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -223,16 +222,13 @@ class _AccountScreenState extends State<AccountScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  // onTap: () =>
-                  //     Future.delayed(Duration(milliseconds: 400)).then(
-                  //           (value) => pushNewScreen(
-                  //         context,
-                  //         screen: WebViewMobileScreen(
-                  //           url: 'https://quikkdelivery.com/mobilereturns',
-                  //         ),
-                  //         withNavBar: false,
-                  //       ),
-                  //     ),
+                  onTap: () =>
+                      Future.delayed(Duration(milliseconds: 400)).then(
+                            (value) => Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => WebViewMobileScreen(
+                                  url: 'https://quikkdelivery.com/mobilereturns',
+                                )))
+                      ),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -247,16 +243,13 @@ class _AccountScreenState extends State<AccountScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  // onTap: () =>
-                  //     Future.delayed(Duration(milliseconds: 400)).then(
-                  //           (value) => pushNewScreen(
-                  //         context,
-                  //         screen: WebViewMobileScreen(
-                  //           url: 'https://quikkdelivery.com/mobileprivacy',
-                  //         ),
-                  //         withNavBar: false,
-                  //       ),
-                  //     ),
+                  onTap: () =>
+                      Future.delayed(Duration(milliseconds: 400)).then(
+                            (value) => Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => WebViewMobileScreen(
+                                  url: 'https://quikkdelivery.com/mobileprivacy',
+                                )))
+                      ),
                 ),
                 ListTile(
                   contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -293,10 +286,10 @@ class _AccountScreenState extends State<AccountScreen> {
                       color: Colors.black,
                     ),
                   ),
-                  // onTap: () =>
-                  //     Future.delayed(Duration(milliseconds: 400)).then(
-                  //           (value) => controller.onLogOutButtonPressed(context),
-                  //     ),
+                  onTap: () =>
+                      Future.delayed(Duration(milliseconds: 400)).then(
+                            (value) => controller.onLogOutButtonPressed(context),
+                      ),
                 ),
               ],
             ),

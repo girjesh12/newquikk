@@ -18,9 +18,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  // HomeController _controller = HomeController();
-
-
 
   @override
   void initState() {
@@ -34,10 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var _controller = Provider.of<HomeController>(context);
-    return _controller.loading
+    return
+      _controller.loading
         ? SafeArea(
         child: CustomHomeScreenShimmer())
-     : Scaffold(
+     :
+      Scaffold(
       body: SafeArea(
         child: SmartRefresher(
           controller: _controller.getRefreshController,
@@ -221,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)
+          borderRadius: BorderRadius.circular(12),
       ),
       child: Container(
         padding: EdgeInsets.only(left: 10, right: 6),

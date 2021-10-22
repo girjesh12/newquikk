@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newquikk/models/account_refer_model.dart';
 import 'package:newquikk/repository/user_repo.dart';
+import 'package:newquikk/res/colors.dart';
 import 'package:newquikk/src/ui/screens/splash.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,10 +79,23 @@ class MyAccountScreenController extends ChangeNotifier {
             ),
           ),
           OutlinedButton(
+               style: ButtonStyle(
+               backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+               if (states.contains(MaterialState.disabled)) {
+                    return Colors.grey;
+               }
+               return AppColors.mainColor;
+               }),
+                 overlayColor: MaterialStateProperty.resolveWith<Color>((states) {
+                   if (states.contains(MaterialState.pressed)) {
+                     return Colors.red;
+                   }
+                   return Colors.transparent;
+                 }),),
             onPressed: () => logout(context),
             child: Text(
               'Logout',
-              style: Theme.of(context).textTheme.button,
+              style: TextStyle(color: Colors.white),
             ),
           )
         ],
